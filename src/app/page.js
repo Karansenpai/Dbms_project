@@ -9,7 +9,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 import getLPTheme from "./getLPTheme";
-import SignInSide from "@/components/signin";
+
 
 function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
   return (
@@ -53,12 +53,11 @@ ToggleCustomTheme.propTypes = {
   toggleCustomTheme: PropTypes.func.isRequired,
 };
 
-import Navbar from "@/components/navbar";
 export default function LandingPage() {
   return (
     <div>
       <div className="y-5">
-        <SignInSide />
+
       </div>
     </div>
   );
