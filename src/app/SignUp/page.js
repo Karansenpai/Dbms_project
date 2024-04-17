@@ -6,8 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import SignUpForm from "@/components/SignUpForm";
-
+import SignUpForm from "../../components/SignUpForm";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -54,8 +53,7 @@ export default function SignInSide() {
           elevation={6}
           square
         >
-          
-          <SignUpForm/>
+          <SignUpForm />
         </Grid>
       </Grid>
     </ThemeProvider>
