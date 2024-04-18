@@ -6,15 +6,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import SignUpForm from "@/components/SignUpForm";
-import { useRouter } from "next/router";
-import { getSession } from "next-auth/react";
+import SignUpForm from "../../../components/SignUpForm"
 const defaultTheme = createTheme();
 
 export default function SignUpSide() {
-
-  
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: "100vh" }}>

@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import SignInForm from "@/components/SignInForm";
+import SignInForm from "../../../components/SignInForm"
 const defaultTheme = createTheme();
 
 export default function SignInSide() {
@@ -42,7 +42,9 @@ export default function SignInSide() {
           square
         >
 
+
           <SignInForm/>
+        
           
         </Grid>
       </Grid>

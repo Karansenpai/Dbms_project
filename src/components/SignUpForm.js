@@ -11,7 +11,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import { FormLabel } from "@mui/material";
-import { signUp } from "@/lib/signup";
+import { signUp } from "../lib/signup";
 function Copyright(props) {
   return (
     <Typography
