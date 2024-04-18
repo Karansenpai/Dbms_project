@@ -1,6 +1,6 @@
 "use server"
-import { DEFAULT_LOGIN_REDIRECT } from "@/route";
-import { signIn } from "@/auth";
+import { DEFAULT_LOGIN_REDIRECT } from "../route";
+import { signIn } from "../auth";
 
 export async function SignIn(username, password, value) {
   try {

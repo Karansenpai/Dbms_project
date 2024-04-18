@@ -3,7 +3,7 @@ import "./globals.css";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 const inter = Inter({ subsets: ["latin"] });
-import { auth } from "@/auth";
+import { auth } from "../auth";
 import { SessionProvider } from "next-auth/react";
 export const metadata = {
   title: "Create Next App",

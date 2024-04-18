@@ -11,7 +11,7 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import { SignIn } from "@/lib/signIn";
+import { SignIn } from "../lib/signIn";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 

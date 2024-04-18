@@ -14,7 +14,7 @@ import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import ToggleColorMode from "./ToggleColorMode.jsx";
 import { signOut, useSession } from "next-auth/react";
-
+import { useRouter } from "next/navigation.js";
 
 const logoStyle = {
   width: "140px",
@@ -23,6 +23,7 @@ const logoStyle = {
 };
 
 const Navbar = ({ mode, toggleColorMode }) => {
+  const router = useRouter();
   const { data: session } = useSession();
   const [open, setOpen] = React.useState(false);
 
@@ -107,6 +108,9 @@ const Navbar = ({ mode, toggleColorMode }) => {
                     size="small"
                     component="a"
                     target="_blank"
+                    onClick={()=>{
+                      router.push("/auth/SignIn")
+                    }}
                   >
                     Sign in
                   </Button>
@@ -116,6 +120,9 @@ const Navbar = ({ mode, toggleColorMode }) => {
                     size="small"
                     component="a"
                     target="_blank"
+                    onClick={()=>{
+                      router.push("/auth/SignUp")
+                    }}
                   >
                     Sign up
                   </Button>
@@ -125,13 +132,14 @@ const Navbar = ({ mode, toggleColorMode }) => {
               {session?.user && (
                 <div>
                   <Button
-                    color="primary"
                     variant="text"
                     size="small"
                     component="a"
                     target="_blank"
                   >
-                    Welcome {session.user.name}
+                    {session.user.name}
+                    <br></br>
+                    {session?.user?.value}
                   </Button>
 
                   <Button
@@ -139,7 +147,7 @@ const Navbar = ({ mode, toggleColorMode }) => {
                     variant="contained"
                     size="small"
                     component="a"
-                    onClick={()=>{
+                    onClick={() => {
                       signOut();
                     }}
                   >
