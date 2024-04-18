@@ -1,31 +1,26 @@
-import NextAuth from "next-auth"
-import Credentials from "next-auth/providers/credentials"
- 
-export const { handlers, auth } = NextAuth({
-  providers: [
-    Credentials({
-      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-      // e.g. domain, username, password, 2FA token, etc.
-      credentials: {
-        email: {},
-        password: {},
+import NextAuth, { Session } from "next-auth"
+import authConfig from "./auth.config"
+
+let existingUser = null;
+export const {
+  handlers: { GET, POST },
+  signIn,
+  signOut,
+  auth,
+} = NextAuth({
+    callbacks: {
+      async session({ session, token }) {
+        session.user = token.user;
+        return session;
       },
-      authorize: async (credentials) => {
-        let user = null
- 
-        // logic to salt and hash password
- 
-        // logic to verify if user exists
- 
-        if (!user) {
-          // No user found, so this is their first attempt to login
-          // meaning this is also the place you could do registration
-          throw new Error("User not found.")
+      async jwt({ token, user }) {
+        if (user) {
+          token.user = user;
         }
- 
-        // return user object with the their profile data
-        return user
+        return token;
       },
-    }),
-  ],
+    },
+  ...authConfig,
+  session: {strategy: "jwt"},
+  
 })

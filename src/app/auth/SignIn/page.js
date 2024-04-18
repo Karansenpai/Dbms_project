@@ -1,28 +1,15 @@
 "use client";
 
 import * as React from "react";
-
 import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import SignUpForm from "@/components/SignUpForm";
-
-
-// TODO remove, this demo shouldn't need to reset the theme.
-
+import SignInForm from "@/components/SignInForm";
 const defaultTheme = createTheme();
 
 export default function SignInSide() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
-
+    
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -54,8 +41,9 @@ export default function SignInSide() {
           elevation={6}
           square
         >
+
+          <SignInForm/>
           
-          <SignUpForm/>
         </Grid>
       </Grid>
     </ThemeProvider>

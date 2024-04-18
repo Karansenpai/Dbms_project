@@ -13,6 +13,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import ToggleColorMode from "./ToggleColorMode";
+import { signOut, useSession } from "next-auth/react";
+
 
 const logoStyle = {
   width: "140px",
@@ -21,6 +23,7 @@ const logoStyle = {
 };
 
 const Navbar = ({ mode, toggleColorMode }) => {
+  const { data: session } = useSession();
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
@@ -138,26 +141,54 @@ const Navbar = ({ mode, toggleColorMode }) => {
               }}
             >
               <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
-              <Button
-                color="primary"
-                variant="text"
-                size="small"
-                component="a"
-                href="/material-ui/getting-started/templates/sign-in/"
-                target="_blank"
-              >
-                Sign in
-              </Button>
-              <Button
-                color="primary"
-                variant="contained"
-                size="small"
-                component="a"
-                href="/material-ui/getting-started/templates/sign-up/"
-                target="_blank"
-              >
-                Sign up
-              </Button>
+              {!session?.user && (
+                <div>
+                  <Button
+                    color="primary"
+                    variant="text"
+                    size="small"
+                    component="a"
+                    target="_blank"
+                  >
+                    Sign in
+                  </Button>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    size="small"
+                    component="a"
+                    target="_blank"
+                  >
+                    Sign up
+                  </Button>
+                </div>
+              )}
+
+              {session?.user && (
+                <div>
+                  <Button
+                    color="primary"
+                    variant="text"
+                    size="small"
+                    component="a"
+                    target="_blank"
+                  >
+                    Welcome {session.user.name}
+                  </Button>
+
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    size="small"
+                    component="a"
+                    onClick={()=>{
+                      signOut();
+                    }}
+                  >
+                    Sign Out
+                  </Button>
+                </div>
+              )}
             </Box>
             <Box sx={{ display: { sm: "", md: "none" } }}>
               <Button

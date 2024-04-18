@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -10,8 +11,11 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import { FormLabel } from "@mui/material";
-import { signUp } from "@/lib/signup";
+import { SignIn } from "@/lib/signIn";
+import { getSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 function Copyright(props) {
   return (
     <Typography
@@ -30,19 +34,19 @@ function Copyright(props) {
   );
 }
 
-const SignUpForm = () => {
+const SignInForm = () => {
+  const { data: session } = useSession();
+  const router = useRouter(); 
+  if(session?.user){
+    router.push("/");
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    await signUp(
-      data.get("Email"),
-      data.get("Username"),
-      data.get("password"),
-      data.get("Address"),
-      data.get("MobileNo"),
-      data.get("Name"),
-      value
-    );
+    const username = data.get("Username");
+    const password = data.get("password");
+    const res = await SignIn(username, password, value);
   };
 
   const handleChange = (event) => {
@@ -59,22 +63,14 @@ const SignUpForm = () => {
         alignItems: "center",
       }}
     >
+     
       <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Sign Up
+        Sign In
       </Typography>
       <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="Name"
-          label="Name"
-          name="Name"
-          autoFocus
-        />
         <TextField
           margin="normal"
           required
@@ -94,36 +90,6 @@ const SignUpForm = () => {
           id="password"
           autoComplete="current-password"
         />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          name="Email"
-          label="Email"
-          type="Email"
-          id="Email"
-        />
-
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          name="MobileNo"
-          label="MobileNo"
-          type="text"
-          id="MobileNo"
-        />
-
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          name="Address"
-          label="Address"
-          type="text"
-          id="Address"
-        />
-
         <FormControl>
           <RadioGroup
             aria-labelledby="demo-controlled-radio-buttons-group"
@@ -146,7 +112,7 @@ const SignUpForm = () => {
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
         >
-          Sign Up
+          Sign In
         </Button>
 
         <Copyright sx={{ mt: 5 }} />
@@ -155,4 +121,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default SignInForm;
